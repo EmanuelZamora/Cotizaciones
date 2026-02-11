@@ -1,0 +1,39 @@
+﻿@model Concesionaria.Models.Cotizaciones
+
+@{
+    ViewBag.Title = "Cotizaciones";
+}
+
+<h2>Detalle de Cotización</h2>
+
+<div>
+    <h4>Cotizaciones</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Código de Cotización</dt>
+        <dd>@Model.IdCotizacion</dd>
+
+        <dt>Nombre del Cliente</dt>
+        <dd>@Model.Clientes.Nombre</dd>
+
+        <dt>Código del Vehículo</dt>
+        <dd>@Model.Vehiculo.Modelo</dd>
+
+        <dt>Banco</dt>
+        <dd>@Model.Bancos.Nombre</dd>
+
+        <dt>Aseguradora</dt>
+        <dd>@Model.Aseguradoras.Nombre</dd>
+
+        <dt>Fecha de Cotización</dt>
+        <dd>@Model.Fecha</dd>
+
+        <dt>Estado</dt>
+        <dd>@Model.Estado</dd>
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdCotizacion }, new { @class = "btn btn-warning" }) |
+    @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-secondary" })
+</p>

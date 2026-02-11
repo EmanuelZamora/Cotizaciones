@@ -1,0 +1,642 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CONCESIONARIAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Aseguradoras">
+          <Key>
+            <PropertyRef Name="IdAseguradora" />
+          </Key>
+          <Property Name="IdAseguradora" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Bancos">
+          <Key>
+            <PropertyRef Name="IdBanco" />
+          </Key>
+          <Property Name="IdBanco" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="Apellido" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Cotizaciones">
+          <Key>
+            <PropertyRef Name="IdCotizacion" />
+          </Key>
+          <Property Name="IdCotizacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCliente" Type="int" />
+          <Property Name="IdVehiculo" Type="int" />
+          <Property Name="IdBanco" Type="int" />
+          <Property Name="IdAseguradora" Type="int" />
+          <Property Name="Fecha" Type="date" />
+          <Property Name="Estado" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Credito">
+          <Key>
+            <PropertyRef Name="Id_Credito" />
+          </Key>
+          <Property Name="Id_Credito" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Monto" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Plazo" Type="datetime" />
+          <Property Name="Tasa_Interes" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="IdCliente" Type="int" />
+        </EntityType>
+        <EntityType Name="Reserva">
+          <Key>
+            <PropertyRef Name="Id_Reserva" />
+          </Key>
+          <Property Name="Id_Reserva" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha_Reserva" Type="datetime" />
+          <Property Name="Estado" Type="nvarchar" MaxLength="1" />
+          <Property Name="IdCliente" Type="int" />
+          <Property Name="Id_Vehiculo" Type="int" />
+        </EntityType>
+        <EntityType Name="Seguro">
+          <Key>
+            <PropertyRef Name="Id_Seguro" />
+          </Key>
+          <Property Name="Id_Seguro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tipo" Type="nvarchar" MaxLength="25" />
+          <Property Name="Costo" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Cobertura" Type="nvarchar" MaxLength="100" />
+          <Property Name="IdCliente" Type="int" />
+          <Property Name="Id_Vehiculo" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Vehiculo">
+          <Key>
+            <PropertyRef Name="Id_Vehiculo" />
+          </Key>
+          <Property Name="Id_Vehiculo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Marca" Type="nvarchar" MaxLength="25" />
+          <Property Name="Modelo" Type="int" />
+          <Property Name="Anio" Type="int" />
+          <Property Name="Precio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Stock" Type="int" />
+        </EntityType>
+        <Association Name="FK_Cotizacion_Aseguradora">
+          <End Role="Aseguradoras" Type="Self.Aseguradoras" Multiplicity="0..1" />
+          <End Role="Cotizaciones" Type="Self.Cotizaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aseguradoras">
+              <PropertyRef Name="IdAseguradora" />
+            </Principal>
+            <Dependent Role="Cotizaciones">
+              <PropertyRef Name="IdAseguradora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cotizacion_Banco">
+          <End Role="Bancos" Type="Self.Bancos" Multiplicity="0..1" />
+          <End Role="Cotizaciones" Type="Self.Cotizaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bancos">
+              <PropertyRef Name="IdBanco" />
+            </Principal>
+            <Dependent Role="Cotizaciones">
+              <PropertyRef Name="IdBanco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cotizacion_Cliente">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="Cotizaciones" Type="Self.Cotizaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Cotizaciones">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cotizacion_Vehiculo">
+          <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="0..1" />
+          <End Role="Cotizaciones" Type="Self.Cotizaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculo">
+              <PropertyRef Name="Id_Vehiculo" />
+            </Principal>
+            <Dependent Role="Cotizaciones">
+              <PropertyRef Name="IdVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Credito_Clientes">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="Credito" Type="Self.Credito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Credito">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reserva_Clientes">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seguro_Clientes">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="Seguro" Type="Self.Seguro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Seguro">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seguro_Vehiculo">
+          <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="0..1" />
+          <End Role="Seguro" Type="Self.Seguro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculo">
+              <PropertyRef Name="Id_Vehiculo" />
+            </Principal>
+            <Dependent Role="Seguro">
+              <PropertyRef Name="Id_Vehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehiculos">
+          <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="0..1" />
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculo">
+              <PropertyRef Name="Id_Vehiculo" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="Id_Vehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CONCESIONARIAModelStoreContainer">
+          <EntitySet Name="Aseguradoras" EntityType="Self.Aseguradoras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bancos" EntityType="Self.Bancos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cotizaciones" EntityType="Self.Cotizaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Credito" EntityType="Self.Credito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reserva" EntityType="Self.Reserva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seguro" EntityType="Self.Seguro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehiculo" EntityType="Self.Vehiculo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cotizacion_Aseguradora" Association="Self.FK_Cotizacion_Aseguradora">
+            <End Role="Aseguradoras" EntitySet="Aseguradoras" />
+            <End Role="Cotizaciones" EntitySet="Cotizaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cotizacion_Banco" Association="Self.FK_Cotizacion_Banco">
+            <End Role="Bancos" EntitySet="Bancos" />
+            <End Role="Cotizaciones" EntitySet="Cotizaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cotizacion_Cliente" Association="Self.FK_Cotizacion_Cliente">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Cotizaciones" EntitySet="Cotizaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cotizacion_Vehiculo" Association="Self.FK_Cotizacion_Vehiculo">
+            <End Role="Vehiculo" EntitySet="Vehiculo" />
+            <End Role="Cotizaciones" EntitySet="Cotizaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Credito_Clientes" Association="Self.FK_Credito_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Credito" EntitySet="Credito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reserva_Clientes" Association="Self.FK_Reserva_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seguro_Clientes" Association="Self.FK_Seguro_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Seguro" EntitySet="Seguro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seguro_Vehiculo" Association="Self.FK_Seguro_Vehiculo">
+            <End Role="Vehiculo" EntitySet="Vehiculo" />
+            <End Role="Seguro" EntitySet="Seguro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehiculos" Association="Self.FK_Vehiculos">
+            <End Role="Vehiculo" EntitySet="Vehiculo" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CONCESIONARIAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Credito" Relationship="CONCESIONARIAModel.FK_Credito_Clientes" FromRole="Clientes" ToRole="Credito" />
+          <NavigationProperty Name="Reserva" Relationship="CONCESIONARIAModel.FK_Reserva_Clientes" FromRole="Clientes" ToRole="Reserva" />
+          <NavigationProperty Name="Seguro" Relationship="CONCESIONARIAModel.FK_Seguro_Clientes" FromRole="Clientes" ToRole="Seguro" />
+          <NavigationProperty Name="Cotizaciones" Relationship="CONCESIONARIAModel.FK_Cotizacion_Cliente" FromRole="Clientes" ToRole="Cotizaciones" />
+        </EntityType>
+        <EntityContainer Name="DbModels" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+          <EntitySet Name="Credito" EntityType="CONCESIONARIAModel.Credito" />
+          <EntitySet Name="Reserva" EntityType="CONCESIONARIAModel.Reserva" />
+          <EntitySet Name="Seguro" EntityType="CONCESIONARIAModel.Seguro" />
+          <EntitySet Name="sysdiagrams" EntityType="CONCESIONARIAModel.sysdiagrams" />
+          <EntitySet Name="Vehiculo" EntityType="CONCESIONARIAModel.Vehiculo" />
+          <AssociationSet Name="FK_Credito_Clientes" Association="CONCESIONARIAModel.FK_Credito_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Credito" EntitySet="Credito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reserva_Clientes" Association="CONCESIONARIAModel.FK_Reserva_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seguro_Clientes" Association="CONCESIONARIAModel.FK_Seguro_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Seguro" EntitySet="Seguro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehiculos" Association="CONCESIONARIAModel.FK_Vehiculos">
+            <End Role="Vehiculo" EntitySet="Vehiculo" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seguro_Vehiculo" Association="CONCESIONARIAModel.FK_Seguro_Vehiculo">
+            <End Role="Vehiculo" EntitySet="Vehiculo" />
+            <End Role="Seguro" EntitySet="Seguro" />
+          </AssociationSet>
+          <EntitySet Name="Aseguradoras" EntityType="CONCESIONARIAModel.Aseguradoras" />
+          <EntitySet Name="Bancos" EntityType="CONCESIONARIAModel.Bancos" />
+          <EntitySet Name="Cotizaciones" EntityType="CONCESIONARIAModel.Cotizaciones" />
+          <AssociationSet Name="FK_Cotizacion_Aseguradora" Association="CONCESIONARIAModel.FK_Cotizacion_Aseguradora">
+            <End Role="Aseguradoras" EntitySet="Aseguradoras" />
+            <End Role="Cotizaciones" EntitySet="Cotizaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cotizacion_Banco" Association="CONCESIONARIAModel.FK_Cotizacion_Banco">
+            <End Role="Bancos" EntitySet="Bancos" />
+            <End Role="Cotizaciones" EntitySet="Cotizaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cotizacion_Cliente" Association="CONCESIONARIAModel.FK_Cotizacion_Cliente">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Cotizaciones" EntitySet="Cotizaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cotizacion_Vehiculo" Association="CONCESIONARIAModel.FK_Cotizacion_Vehiculo">
+            <End Role="Vehiculo" EntitySet="Vehiculo" />
+            <End Role="Cotizaciones" EntitySet="Cotizaciones" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Credito">
+          <Key>
+            <PropertyRef Name="Id_Credito" />
+          </Key>
+          <Property Name="Id_Credito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Monto" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Plazo" Type="DateTime" Precision="3" />
+          <Property Name="Tasa_Interes" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="IdCliente" Type="Int32" />
+          <NavigationProperty Name="Clientes" Relationship="CONCESIONARIAModel.FK_Credito_Clientes" FromRole="Credito" ToRole="Clientes" />
+        </EntityType>
+        <EntityType Name="Reserva">
+          <Key>
+            <PropertyRef Name="Id_Reserva" />
+          </Key>
+          <Property Name="Id_Reserva" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha_Reserva" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="IdCliente" Type="Int32" />
+          <Property Name="Id_Vehiculo" Type="Int32" />
+          <NavigationProperty Name="Clientes" Relationship="CONCESIONARIAModel.FK_Reserva_Clientes" FromRole="Reserva" ToRole="Clientes" />
+          <NavigationProperty Name="Vehiculo" Relationship="CONCESIONARIAModel.FK_Vehiculos" FromRole="Reserva" ToRole="Vehiculo" />
+        </EntityType>
+        <EntityType Name="Seguro">
+          <Key>
+            <PropertyRef Name="Id_Seguro" />
+          </Key>
+          <Property Name="Id_Seguro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tipo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Costo" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Cobertura" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdCliente" Type="Int32" />
+          <Property Name="Id_Vehiculo" Type="Int32" />
+          <NavigationProperty Name="Clientes" Relationship="CONCESIONARIAModel.FK_Seguro_Clientes" FromRole="Seguro" ToRole="Clientes" />
+          <NavigationProperty Name="Vehiculo" Relationship="CONCESIONARIAModel.FK_Seguro_Vehiculo" FromRole="Seguro" ToRole="Vehiculo" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Vehiculo">
+          <Key>
+            <PropertyRef Name="Id_Vehiculo" />
+          </Key>
+          <Property Name="Id_Vehiculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Marca" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Modelo" Type="Int32" />
+          <Property Name="Anio" Type="Int32" />
+          <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Stock" Type="Int32" />
+          <NavigationProperty Name="Reserva" Relationship="CONCESIONARIAModel.FK_Vehiculos" FromRole="Vehiculo" ToRole="Reserva" />
+          <NavigationProperty Name="Seguro" Relationship="CONCESIONARIAModel.FK_Seguro_Vehiculo" FromRole="Vehiculo" ToRole="Seguro" />
+          <NavigationProperty Name="Cotizaciones" Relationship="CONCESIONARIAModel.FK_Cotizacion_Vehiculo" FromRole="Vehiculo" ToRole="Cotizaciones" />
+        </EntityType>
+        <Association Name="FK_Credito_Clientes">
+          <End Type="CONCESIONARIAModel.Clientes" Role="Clientes" Multiplicity="0..1" />
+          <End Type="CONCESIONARIAModel.Credito" Role="Credito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Credito">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reserva_Clientes">
+          <End Type="CONCESIONARIAModel.Clientes" Role="Clientes" Multiplicity="0..1" />
+          <End Type="CONCESIONARIAModel.Reserva" Role="Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seguro_Clientes">
+          <End Type="CONCESIONARIAModel.Clientes" Role="Clientes" Multiplicity="0..1" />
+          <End Type="CONCESIONARIAModel.Seguro" Role="Seguro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Seguro">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehiculos">
+          <End Type="CONCESIONARIAModel.Vehiculo" Role="Vehiculo" Multiplicity="0..1" />
+          <End Type="CONCESIONARIAModel.Reserva" Role="Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculo">
+              <PropertyRef Name="Id_Vehiculo" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="Id_Vehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seguro_Vehiculo">
+          <End Type="CONCESIONARIAModel.Vehiculo" Role="Vehiculo" Multiplicity="0..1" />
+          <End Type="CONCESIONARIAModel.Seguro" Role="Seguro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculo">
+              <PropertyRef Name="Id_Vehiculo" />
+            </Principal>
+            <Dependent Role="Seguro">
+              <PropertyRef Name="Id_Vehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Aseguradoras">
+          <Key>
+            <PropertyRef Name="IdAseguradora" />
+          </Key>
+          <Property Name="IdAseguradora" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cotizaciones" Relationship="CONCESIONARIAModel.FK_Cotizacion_Aseguradora" FromRole="Aseguradoras" ToRole="Cotizaciones" />
+        </EntityType>
+        <EntityType Name="Bancos">
+          <Key>
+            <PropertyRef Name="IdBanco" />
+          </Key>
+          <Property Name="IdBanco" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cotizaciones" Relationship="CONCESIONARIAModel.FK_Cotizacion_Banco" FromRole="Bancos" ToRole="Cotizaciones" />
+        </EntityType>
+        <EntityType Name="Cotizaciones">
+          <Key>
+            <PropertyRef Name="IdCotizacion" />
+          </Key>
+          <Property Name="IdCotizacion" Type="Int32" Nullable="false" />
+          <Property Name="IdCliente" Type="Int32" />
+          <Property Name="IdVehiculo" Type="Int32" />
+          <Property Name="IdBanco" Type="Int32" />
+          <Property Name="IdAseguradora" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Aseguradoras" Relationship="CONCESIONARIAModel.FK_Cotizacion_Aseguradora" FromRole="Cotizaciones" ToRole="Aseguradoras" />
+          <NavigationProperty Name="Bancos" Relationship="CONCESIONARIAModel.FK_Cotizacion_Banco" FromRole="Cotizaciones" ToRole="Bancos" />
+          <NavigationProperty Name="Clientes" Relationship="CONCESIONARIAModel.FK_Cotizacion_Cliente" FromRole="Cotizaciones" ToRole="Clientes" />
+          <NavigationProperty Name="Vehiculo" Relationship="CONCESIONARIAModel.FK_Cotizacion_Vehiculo" FromRole="Cotizaciones" ToRole="Vehiculo" />
+        </EntityType>
+        <Association Name="FK_Cotizacion_Aseguradora">
+          <End Type="CONCESIONARIAModel.Aseguradoras" Role="Aseguradoras" Multiplicity="0..1" />
+          <End Type="CONCESIONARIAModel.Cotizaciones" Role="Cotizaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aseguradoras">
+              <PropertyRef Name="IdAseguradora" />
+            </Principal>
+            <Dependent Role="Cotizaciones">
+              <PropertyRef Name="IdAseguradora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cotizacion_Banco">
+          <End Type="CONCESIONARIAModel.Bancos" Role="Bancos" Multiplicity="0..1" />
+          <End Type="CONCESIONARIAModel.Cotizaciones" Role="Cotizaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bancos">
+              <PropertyRef Name="IdBanco" />
+            </Principal>
+            <Dependent Role="Cotizaciones">
+              <PropertyRef Name="IdBanco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cotizacion_Cliente">
+          <End Type="CONCESIONARIAModel.Clientes" Role="Clientes" Multiplicity="0..1" />
+          <End Type="CONCESIONARIAModel.Cotizaciones" Role="Cotizaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Cotizaciones">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cotizacion_Vehiculo">
+          <End Type="CONCESIONARIAModel.Vehiculo" Role="Vehiculo" Multiplicity="0..1" />
+          <End Type="CONCESIONARIAModel.Cotizaciones" Role="Cotizaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculo">
+              <PropertyRef Name="Id_Vehiculo" />
+            </Principal>
+            <Dependent Role="Cotizaciones">
+              <PropertyRef Name="IdVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CONCESIONARIAModelStoreContainer" CdmEntityContainer="DbModels">
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="CONCESIONARIAModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Credito">
+            <EntityTypeMapping TypeName="CONCESIONARIAModel.Credito">
+              <MappingFragment StoreEntitySet="Credito">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Tasa_Interes" ColumnName="Tasa_Interes" />
+                <ScalarProperty Name="Plazo" ColumnName="Plazo" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Id_Credito" ColumnName="Id_Credito" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reserva">
+            <EntityTypeMapping TypeName="CONCESIONARIAModel.Reserva">
+              <MappingFragment StoreEntitySet="Reserva">
+                <ScalarProperty Name="Id_Vehiculo" ColumnName="Id_Vehiculo" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha_Reserva" ColumnName="Fecha_Reserva" />
+                <ScalarProperty Name="Id_Reserva" ColumnName="Id_Reserva" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seguro">
+            <EntityTypeMapping TypeName="CONCESIONARIAModel.Seguro">
+              <MappingFragment StoreEntitySet="Seguro">
+                <ScalarProperty Name="Id_Vehiculo" ColumnName="Id_Vehiculo" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Cobertura" ColumnName="Cobertura" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Id_Seguro" ColumnName="Id_Seguro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CONCESIONARIAModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehiculo">
+            <EntityTypeMapping TypeName="CONCESIONARIAModel.Vehiculo">
+              <MappingFragment StoreEntitySet="Vehiculo">
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Id_Vehiculo" ColumnName="Id_Vehiculo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Aseguradoras">
+            <EntityTypeMapping TypeName="CONCESIONARIAModel.Aseguradoras">
+              <MappingFragment StoreEntitySet="Aseguradoras">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdAseguradora" ColumnName="IdAseguradora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bancos">
+            <EntityTypeMapping TypeName="CONCESIONARIAModel.Bancos">
+              <MappingFragment StoreEntitySet="Bancos">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cotizaciones">
+            <EntityTypeMapping TypeName="CONCESIONARIAModel.Cotizaciones">
+              <MappingFragment StoreEntitySet="Cotizaciones">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdAseguradora" ColumnName="IdAseguradora" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="IdVehiculo" ColumnName="IdVehiculo" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdCotizacion" ColumnName="IdCotizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

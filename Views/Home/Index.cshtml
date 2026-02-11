@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Concesionaria de Vehículos";
+}
+
+<!-- Hero Section -->
+<header class="bg-primary text-white text-center py-5">
+    <h1 class="display-4">Bienvenido a la Concesionaria de Vehículos</h1>
+    <p class="lead">Sistema de gestión para clientes, reservas y ventas</p>
+    <a href="@Url.Action("Index","Clientes")" class="btn btn-light btn-lg">Ver Clientes</a>
+    <a href="@Url.Action("Index","Cotizaciones")" class="btn btn-secondary btn-lg ml-2">Ver Cotizaciones</a>
+</header>
+
+<main class="container my-5">
+    <div class="row">
+        <!-- Misión -->
+        <section class="col-md-6 text-center">
+            <h2>Misión</h2>
+            <p>
+                Ofrecer un sistema confiable y eficiente para administrar clientes, reservas y vehículos,
+                facilitando la gestión integral de la concesionaria.
+            </p>
+        </section>
+
+        <!-- Visión -->
+        <section class="col-md-6 text-center">
+            <h2>Visión</h2>
+            <p>
+                Ser la plataforma líder en soluciones tecnológicas para concesionarias,
+                apoyando el crecimiento y la satisfacción de los clientes.
+            </p>
+        </section>
+    </div>
+
+    <!-- Servicios -->
+    <div class="row my-5">
+        <section class="col-md-12 text-center">
+            <h2>Servicios Disponibles</h2>
+            <p>
+                Nuestro sistema permite:
+            </p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">📋 Gestión completa de clientes</li>
+                <li class="list-group-item">🚗 Administración de reservas de vehículos</li>
+                <li class="list-group-item">📦 Control de inventario de autos disponibles</li>
+                <li class="list-group-item">💼 Seguimiento de ventas y procesos comerciales</li>
+                <li class="list-group-item">📝 Cotizaciones de vehículos y créditos automotrices</li>
+            </ul>
+            <div class="mt-3">
+                <a href="@Url.Action("Index","Cotizaciones")" class="btn btn-outline-primary btn-lg">Ir a Cotizaciones</a>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-light text-center py-3 mt-5">
+    <p>&copy; @DateTime.Now.Year - Concesionaria de Vehículos</p>
+</footer>

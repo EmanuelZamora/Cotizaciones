@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dd2add05475649b3a076481e385dad90" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="CONCESIONARIAModel.Clientes" Width="1.5" PointX="1.125" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CONCESIONARIAModel.Credito" Width="1.5" PointX="3.25" PointY="1.5" />
+        <EntityTypeShape EntityType="CONCESIONARIAModel.Reserva" Width="1.5" PointX="10.25" PointY="3.75" />
+        <EntityTypeShape EntityType="CONCESIONARIAModel.Seguro" Width="1.5" PointX="6" PointY="3.5" />
+        <EntityTypeShape EntityType="CONCESIONARIAModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="6.5" />
+        <EntityTypeShape EntityType="CONCESIONARIAModel.Vehiculo" Width="1.5" PointX="3.75" PointY="4.5" />
+        <AssociationConnector Association="CONCESIONARIAModel.FK_Credito_Clientes" />
+        <AssociationConnector Association="CONCESIONARIAModel.FK_Reserva_Clientes" />
+        <AssociationConnector Association="CONCESIONARIAModel.FK_Seguro_Clientes" />
+        <AssociationConnector Association="CONCESIONARIAModel.FK_Vehiculos" />
+        <AssociationConnector Association="CONCESIONARIAModel.FK_Seguro_Vehiculo" />
+        <EntityTypeShape EntityType="CONCESIONARIAModel.Aseguradoras" Width="1.5" PointX="6.25" PointY="6.625" />
+        <EntityTypeShape EntityType="CONCESIONARIAModel.Bancos" Width="1.5" PointX="8.375" PointY="6.5" />
+        <EntityTypeShape EntityType="CONCESIONARIAModel.Cotizaciones" Width="1.5" PointX="7.625" PointY="0.875" />
+        <AssociationConnector Association="CONCESIONARIAModel.FK_Cotizacion_Aseguradora" />
+        <AssociationConnector Association="CONCESIONARIAModel.FK_Cotizacion_Banco" />
+        <AssociationConnector Association="CONCESIONARIAModel.FK_Cotizacion_Cliente" />
+        <AssociationConnector Association="CONCESIONARIAModel.FK_Cotizacion_Vehiculo" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

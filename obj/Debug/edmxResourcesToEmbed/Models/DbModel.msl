@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CONCESIONARIAModelStoreContainer" CdmEntityContainer="DbModels">
+    <EntitySetMapping Name="Clientes">
+      <EntityTypeMapping TypeName="CONCESIONARIAModel.Clientes">
+        <MappingFragment StoreEntitySet="Clientes">
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Credito">
+      <EntityTypeMapping TypeName="CONCESIONARIAModel.Credito">
+        <MappingFragment StoreEntitySet="Credito">
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="Tasa_Interes" ColumnName="Tasa_Interes" />
+          <ScalarProperty Name="Plazo" ColumnName="Plazo" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="Id_Credito" ColumnName="Id_Credito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reserva">
+      <EntityTypeMapping TypeName="CONCESIONARIAModel.Reserva">
+        <MappingFragment StoreEntitySet="Reserva">
+          <ScalarProperty Name="Id_Vehiculo" ColumnName="Id_Vehiculo" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Fecha_Reserva" ColumnName="Fecha_Reserva" />
+          <ScalarProperty Name="Id_Reserva" ColumnName="Id_Reserva" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Seguro">
+      <EntityTypeMapping TypeName="CONCESIONARIAModel.Seguro">
+        <MappingFragment StoreEntitySet="Seguro">
+          <ScalarProperty Name="Id_Vehiculo" ColumnName="Id_Vehiculo" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="Cobertura" ColumnName="Cobertura" />
+          <ScalarProperty Name="Costo" ColumnName="Costo" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Id_Seguro" ColumnName="Id_Seguro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="CONCESIONARIAModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vehiculo">
+      <EntityTypeMapping TypeName="CONCESIONARIAModel.Vehiculo">
+        <MappingFragment StoreEntitySet="Vehiculo">
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Anio" ColumnName="Anio" />
+          <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+          <ScalarProperty Name="Marca" ColumnName="Marca" />
+          <ScalarProperty Name="Id_Vehiculo" ColumnName="Id_Vehiculo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Aseguradoras">
+      <EntityTypeMapping TypeName="CONCESIONARIAModel.Aseguradoras">
+        <MappingFragment StoreEntitySet="Aseguradoras">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdAseguradora" ColumnName="IdAseguradora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bancos">
+      <EntityTypeMapping TypeName="CONCESIONARIAModel.Bancos">
+        <MappingFragment StoreEntitySet="Bancos">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cotizaciones">
+      <EntityTypeMapping TypeName="CONCESIONARIAModel.Cotizaciones">
+        <MappingFragment StoreEntitySet="Cotizaciones">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="IdAseguradora" ColumnName="IdAseguradora" />
+          <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+          <ScalarProperty Name="IdVehiculo" ColumnName="IdVehiculo" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="IdCotizacion" ColumnName="IdCotizacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
